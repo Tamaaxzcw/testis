@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.4P Forum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABF/pEDAAAAAXNSR0IArs4c6QAAANtJREFUWAntlkEOhDAMBGej/r/l92T1LhSjVfB1o52yF0WbNqE+z41t1+V+13/J8S4x4t85bLgG4Q18wAcsjXzJAY+HvwD6wT9gK8o00S1gT0j1j3t6YV4Bdo2zQ2B3gZcI5J/71ApgF2B3gZcM6r/3nQ0e7Xb3J2129x/9uP/rBvcS7IeB/N/rOQW4g/8u3B/vT9A8F8T4I+N/x7439LvT/T2A/+N+X9j/fT2B/2N+B9g/wB5j5F2T2H47gAAAAAElFTkSuQmCC">
+    
+    <style>
+        /* ============================== */
+        /* 1. VARIABEL & TEMA DASAR (ELEGAN & HARMONIS) */
+        /* ============================== */
+        :root {
+            /* Tema Light (Default) - Lembut & Mewah */
+            --bg-body: #f5f7f9; /* Off-White/Soft Grey */
+            --bg-primary: #ffffff; /* Putih Bersih */
+            --bg-secondary: #e9ecef; /* Latar Aksen/Button Hover */
+            --text-primary: #212529;
+            --text-secondary: #495057; /* Abu Tua untuk Kontras */
+            --color-accent: #c0b283; /* Muted Gold/Beige untuk Aksen Utama */
+            --color-danger: #e76f51; /* Coral yang Diredam untuk Tag */
+            --color-shadow: rgba(0, 0, 0, 0.08);
+            --border-radius-main: 10px;
+            --font-heading: 'Merriweather', serif;
+            --font-body: 'Inter', sans-serif;
+            --icon-color: #c0b283; 
+        }
+
+        /* Tema Dark (Deep & Cozy) */
+        .dark-mode {
+            --bg-body: #1c1f24;
+            --bg-primary: #2b2f34;
+            --bg-secondary: #3c424a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #fdf0d5; /* Putih Gading */
+            --color-accent: #c0b283; /* Muted Gold tetap menjadi Aksen Kuat */
+            --color-danger: #fca311; /* Oranye Tembaga */
+            --color-shadow: rgba(255, 255, 255, 0.05);
+            --icon-color: #fdf0d5; 
+        }
+
+        /* ============================== */
+        /* 2. GLOBAL STYLES & TIPOGRAFI */
+        /* ============================== */
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.8s, color 0.8s;
+            line-height: 1.7;
+        }
+
+        /* HEADER & NAVIGASI (Sleek & Fixed) */
+        header {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 15px 5%;
+            box-shadow: 0 2px 8px var(--color-shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            margin: 0;
+            font-size: 1.8em;
+            color: var(--color-accent);
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px var(--color-shadow);
+        }
+
+        /* Judul Konten */
+        h2 {
+            font-family: var(--font-heading);
+            text-align: center;
+            margin: 40px 0 25px;
+            color: var(--text-secondary);
+            display: block;
+            font-weight: 700;
+            font-size: 2.1em;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 2px;
+            background: var(--color-accent);
+            margin: 10px auto 0;
+            border-radius: 1px;
+        }
+
+        main {
+            padding: 50px 5%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        /* ============================== */
+        /* 3. TOMBOL TEMA */
+        /* ============================== */
+        #theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--text-secondary);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 1px 5px var(--color-shadow);
+            transition: all 0.4s ease-in-out;
+        }
+        #theme-toggle:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            transform: scale(1.1);
+        }
+        
+        #theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            color: var(--icon-color);
+        }
+        #theme-toggle:hover svg {
+            color: var(--bg-primary);
+        }
+
+
+        /* ============================== */
+        /* 4. NAVIGASI TAB & FILTER */
+        /* ============================== */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius-main);
+            box-shadow: 0 5px 15px var(--color-shadow);
+            padding: 5px;
+        }
+
+        .tab-button {
+            font-family: var(--font-body);
+            background: transparent;
+            color: var(--text-primary);
+            border: none;
+            padding: 12px 28px;
+            margin: 3px;
+            border-radius: var(--border-radius-main);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .tab-button:hover {
+            background: var(--bg-secondary);
+        }
+
+        .tab-button.active {
+            background: var(--color-accent);
+            color: var(--bg-primary);
+            box-shadow: 0 4px 10px rgba(192, 178, 131, 0.5); /* Shadow Gold */
+            transform: translateY(-3px);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Filter Genre */
+        #genre-filter {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 35px;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius-main);
+            box-shadow: 0 2px 8px var(--color-shadow);
+        }
+
+        #genre-select {
+            font-family: var(--font-body);
+            padding: 12px 20px;
+            border-radius: 6px;
+            border: 1px solid var(--bg-secondary);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            font-size: 1em;
+            cursor: pointer;
+            min-width: 300px;
+            transition: all 0.3s;
+        }
+        #genre-select:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(192, 178, 131, 0.3);
+            outline: none;
+        }
+
+        /* ============================== */
+        /* 5. GRID KONTEN & CARD (BERSIH & DETAIL) */
+        /* ============================== */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 10px 0;
+        }
+
+        .card {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius-main);
+            padding: 25px;
+            /* Efek Kedalaman Halus */
+            box-shadow: 0 4px 12px var(--color-shadow);
+            transition: all 0.4s ease;
+            border-left: 5px solid var(--color-accent);
+            animation: fadeIn 0.7s ease-out; 
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-7px); 
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--color-danger); /* Aksen Merah Bata saat hover */
+        }
+        
+        .card h3 {
+            font-family: var(--font-heading);
+            color: var(--text-secondary);
+            margin-top: 0;
+            font-size: 1.5em;
+            font-weight: 700;
+            border-bottom: 1px dashed var(--bg-secondary);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            font-family: var(--font-body);
+            font-size: 0.95em;
+            color: var(--text-primary);
+            margin: 0 0 15px;
+        }
+        
+        .card .genre-tag {
+            display: inline-block;
+            background: var(--color-danger);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* ============================== */
+        /* 6. FOOTER */
+        /* ============================== */
+        footer {
+            text-align: center;
+            padding: 40px 5%;
+            margin-top: 60px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.85em;
+            border-top: 1px solid var(--bg-secondary);
+        }
+        footer p {
+            margin: 5px 0;
+        }
+
+
+        /* ============================== */
+        /* 7. MEDIA QUERIES (RESPONSIF) */
+        /* ============================== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .tab-button {
+                flex-basis: 45%; 
+                margin: 5px 2%;
+                padding: 10px 15px;
+            }
+            .content-grid {
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
+            #genre-select {
+                min-width: 90%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>D.4P | Forum</h1>
+        <button id="theme-toggle" aria-label="Ganti Tema">
+            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun" style="display: block;">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon" style="display: none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <main>
+        
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="openTab('anime-tab', this)">Anime</button>
+            <button class="tab-button" onclick="openTab('character-tab', this)">Waifuable/Husbuable</button>
+            <button class="tab-button" onclick="openTab('game-tab', this)">Game Anime</button>
+        </div>
+
+        <div id="anime-tab" class="tab-content active">
+            <h2>Daftar Rekomendasi Anime Terbaik</h2>
+            
+            <div id="genre-filter">
+                <label for="genre-select" style="font-weight: 600; margin-right: 15px;">FILTER GENRE</label>
+                <select id="genre-select" onchange="filterAnime()">
+                    </select>
+            </div>
+
+            <div id="anime-grid" class="content-grid">
+                </div>
+        </div>
+
+        <div id="character-tab" class="tab-content">
+            <h2>Best Character</h2>
+            <div id="character-grid" class="content-grid">
+                </div>
+        </div>
+
+        <div id="game-tab" class="tab-content">
+            <h2>Game Bertema Anime Pilihan</h2>
+            <div id="game-grid" class="content-grid">
+                </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>By Fanmade - D.4P Forum </p>
+        <p>Copyright © 24 Oct 2025. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // ==============================
+        // 1. DATA REAL (52 ANIME, 52 KARAKTER, 22 GAME)
+        // Data tidak diubah, fokus pada presentasi.
+        // ==============================
+        
+        const baseAnime = [
+            { id: 1, title: "Attack on Titan", genre: "Action, Dark Fantasi, Seinen", desc: "Manusia berjuang melawan raksasa di balik dinding. Penuh pengorbanan dan plot twist tingkat tinggi." },
+            { id: 2, title: "Death Note", genre: "Mystery, Psychological, Thriller", desc: "Pertarungan intelektual antara Light Yagami dan detektif L." },
+            { id: 3, title: "Fullmetal Alchemist: Brotherhood", genre: "Adventure, Fantasi, Shounen", desc: "Dua bersaudara mencari Batu Bertuah. Shounen dengan plot terbaik." },
+            { id: 4, title: "Steins;Gate", genre: "Sci-Fi, Thriller, Time Travel", desc: "Eksperimen gila dengan mesin waktu. Cerita yang membuat otak berputar." },
+            { id: 5, title: "Jujutsu Kaisen", genre: "Action, Supernatural, Shounen", desc: "Melawan kutukan dan roh jahat modern. Animasi pertarungan yang luar biasa." },
+            { id: 6, title: "Haikyuu!!", genre: "Sports, Shounen, Komedi", desc: "Perjalanan tim voli Karasuno. Energi dan perkembangan karakter yang adiktif." },
+            { id: 7, title: "One Punch Man", genre: "Action, Komedi, Sci-Fi", desc: "Parodi superhero, tentang Saitama yang terlalu kuat dan bosan." },
+            { id: 8, title: "Code Geass", genre: "Mecha, Action, Psychological", desc: "Lelouch memimpin pemberontakan dengan kekuatan Geass. Strategi perang yang brilian." },
+            { id: 9, title: "Demon Slayer (Kimetsu no Yaiba)", genre: "Action, Adventure, Fantasi", desc: "Tanjiro menjadi pemburu iblis. Animasi (ufotable) yang memanjakan mata." },
+            { id: 10, title: "Vinland Saga", genre: "Action, Historical, Seinen", desc: "Kisah balas dendam Thorfinn di era Viking. Tema kedamaian dan kekerasan." },
+            { id: 11, title: "Kimi No Nawa (Your Name)", genre: "Romance, Fantasi, Drama", desc: "Film tentang pertukaran tubuh yang melintasi waktu. Sangat emosional." },
+            { id: 12, title: "Spy x Family", genre: "Action, Komedi, Slice of Life", desc: "Keluarga palsu yang menggemaskan dengan misi rahasia." },
+            { id: 13, title: "My Hero Academia", genre: "Action, Shounen, Super Power", desc: "Dunia superhero, Deku berjuang menjadi pahlawan nomor satu." },
+            { id: 14, title: "Cowboy Bebop", genre: "Sci-Fi, Space Western, Action", desc: "Kisah para pemburu hadiah (bounty hunters) di luar angkasa. Klasik wajib tonton." },
+            { id: 15, title: "Mob Psycho 100", genre: "Action, Slice of Life, Komedi", desc: "Kisah Shigeo Kageyama (Mob), esper yang ingin hidup normal." },
+            { id: 16, title: "Hunter x Hunter (2011)", genre: "Adventure, Shounen, Super Power", desc: "Perjalanan Gon mencari ayahnya. Plot yang cerdas dan alur yang kompleks." },
+            { id: 17, title: "Violet Evergarden", genre: "Drama, Slice of Life, Fantasi", desc: "Mencari makna 'cinta' setelah perang. Animasi Kyoto Animation yang indah." },
+            { id: 18, title: "Your Lie in April", genre: "Drama, Romance, Music", desc: "Perjalanan seorang pianis yang kehilangan kemampuan bermain. Sangat mengharukan." },
+            { id: 19, title: "Berserk (1997)", genre: "Dark Fantasi, Action, Seinen", desc: "Kisah Guts, pendekar pedang hitam. Salah satu mahakarya Fantasi gelap." },
+            { id: 20, title: "Re: Zero", genre: "Isekai, Psychological, Drama", desc: "Subaru dengan kemampuan 'Return by Death'. Penuh tekanan mental." },
+            { id: 21, title: "Chainsaw Man", genre: "Action, Horror, Shounen", desc: "Denji, seorang pemuda yang menjadi hybrid manusia-iblis Gergaji." },
+            { id: 22, title: "Konosuba", genre: "Isekai, Komedi, Fantasi", desc: "Parodi Isekai yang sangat lucu dan konyol." },
+            { id: 23, title: "Mushoku Tensei", genre: "Isekai, Fantasi, Drama", desc: "Anime Isekai modern dengan pembangunan dunia yang mendalam dan realistis." },
+            { id: 24, title: "Promare", genre: "Mecha, Action, Sci-Fi", desc: "Film animasi Studio Trigger yang penuh warna dan aksi cepat." },
+            { id: 25, title: "Grand Blue Dreaming", genre: "Slice of Life, Komedi", desc: "Kisah klub selam yang lebih sering mabuk daripada menyelam. Komedi terbaik." },
+            { id: 26, "title": "Tokyo Ghoul", "genre": "Dark Fantasi, Horror, Action", "desc": "Kaneki, seorang manusia yang berubah menjadi Ghoul, makhluk pemakan manusia." },
+            { id: 27, "title": "Puella Magi Madoka Magica", "genre": "Mahou Shoujo, Psychological, Drama", "desc": "Dekonstruksi genre gadis sihir menjadi horor psikologis." },
+            { id: 28, "title": "Baccano!", "genre": "Action, Mystery, Supernatural", "desc": "Kisah-kisah yang saling terkait di tahun 1930-an Amerika. Unik." },
+            { id: 29, "title": "Noragami", "genre": "Supernatural, Action, Shounen", "desc": "Yato, dewa perang kecil yang ingin membangun kuilnya sendiri." },
+            { id: 30, "title": "Psycho-Pass", "genre": "Sci-Fi, Psychological, Thriller", "desc": "Masyarakat masa depan yang diatur oleh sistem kriminalitas (Sibyl System)." },
+            { id: 31, title: "The Promised Neverland (S1)", genre: "Mystery, Psychological, Horror", desc: "Anak-anak panti asuhan yang menemukan rahasia mengerikan." },
+            { id: 32, title: "Plastic Memories", genre: "Sci-Fi, Romance, Drama", desc: "Kisah cinta antara manusia dan android dengan batas waktu hidup." },
+            { id: 33, title: "Toradora!", genre: "Romance, School, Komedi", desc: "Kisah cinta klasik antara Ryuji dan Taiga. Komedi romantis wajib." },
+            { id: 34, title: "Rascal Does Not Dream of Bunny Girl Senpai", genre: "Supernatural, Romance, School", desc: "Masalah 'Sindrom Remaja' yang unik. Dialog yang cerdas." },
+            { id: 35, title: "One Piece", genre: "Adventure, Action, Shounen", desc: "Monkey D. Luffy mencari harta karun One Piece. Petualangan tanpa akhir." },
+            { id: 36, title: "Naruto Shippuden", genre: "Action, Shounen, Adventure", desc: "Kisah ninja Naruto Uzumaki. Persahabatan dan pertarungan yang epik." },
+            { id: 37, title: "Fairy Tail", genre: "Action, Adventure, Magic", desc: "Natsu dan guild Fairy Tail. Penuh persahabatan dan keajaiban." },
+            { id: 38, title: "Gintama", genre: "Action, Sci-Fi, Komedi, Parody", desc: "Parodi dan komedi konyol yang diselingi aksi serius." },
+            { id: 39, title: "Bocchi the Rock!", genre: "Slice of Life, Komedi, Music", desc: "Hitori Gotoh, gadis pemalu yang menjadi gitaris band." },
+            { id: 40, title: "Kaguya-sama: Love Is War", genre: "Romance, Komedi, School", desc: "Dua jenius yang saling memaksa agar yang lain mengaku cinta duluan." },
+            { id: 41, title: "Made in Abyss", genre: "Adventure, Sci-Fi, Fantasi", desc: "Petualangan yang gelap dan indah ke dalam lubang raksasa." },
+            { id: 42, title: "Black Clover", genre: "Action, Fantasi, Shounen", desc: "Asta, anak tanpa sihir di dunia sihir, berjuang menjadi Raja Penyihir." },
+            { id: 43, title: "Dr. Stone", genre: "Sci-Fi, Adventure, Shounen", desc: "Senku menghidupkan kembali peradaban manusia menggunakan sains." },
+            { id: 44, title: "Sword Art Online", genre: "Isekai, Action, Romance", desc: "Terjebak dalam game VRMMO. Anime pionir Isekai modern." },
+            { id: 45, title: "Angel Beats!", genre: "Drama, Supernatural, School", desc: "Kehidupan setelah kematian, berlatar sekolah. Sangat emosional." },
+            { id: 46, title: "Erased", genre: "Mystery, Supernatural, Drama", desc: "Seorang pria dapat kembali ke masa lalu untuk mencegah tragedi." },
+            { id: 47, title: "No Game No Life", genre: "Isekai, Fantasi, Komedi", desc: "Dua NEET jenius yang dikirim ke dunia di mana semua diatur oleh game." },
+            { id: 48, title: "A Place Further than the Universe", genre: "Slice of Life, Adventure", desc: "Empat gadis remaja melakukan perjalanan ke Antartika. Inspiratif." },
+            { id: 49, title: "Slam Dunk", genre: "Sports, School, Komedi", desc: "Anime olahraga basket klasik yang sangat berpengaruh." },
+            { id: 50, title: "Jojo's Bizarre Adventure", genre: "Action, Adventure, Supernatural", desc: "Kisah beberapa generasi keluarga Joestar." },
+            { id: 51, title: "Clannad: After Story", genre: "Drama, Romance, Slice of Life", desc: "Salah satu anime drama paling menyentuh dan terbaik sepanjang masa." },
+            { id: 52, title: "Beastars", genre: "Drama, Psychological, School", desc: "Kisah di dunia hewan antropomorfik, Legoshi si serigala." }
+        ];
+        
+        const characterData = [
+            { id: 1, name: "Levi Ackerman", type: "Husbuable/Stoic", desc: "Kapten Survey Corps yang terkuat. Obsesi kebersihan dan aura dingin." },
+            { id: 2, name: "Mikasa Ackerman", type: "Waifuable/Badass", desc: "Prajurit yang sangat kuat, dengan kesetiaan yang tak tergoyahkan pada Eren." },
+            { id: 3, name: "Gojo Satoru", type: "Husbuable/Overpowered", desc: "Penyihir Jujutsu terkuat dengan kekuatan 'Limitless' dan 'Six Eyes'." },
+            { id: 4, name: "Yor Forger", type: "Waifuable/Assassin", desc: "Ibu palsu yang mematikan ('Thorn Princess') namun sangat canggung dan polos di rumah." },
+            { id: 5, name: "Lelouch Lamperouge", type: "Husbuable/Genius", desc: "Zero, pangeran jenius dengan ambisi mengubah dunia." },
+            { id: 6, name: "Rem", type: "Waifuable/Maid", desc: "Maid setia yang memiliki kekuatan iblis. Pilihan Waifu Sejati." },
+            { id: 7, name: "Edward Elric", type: "Husbuable/Determined", desc: "Alkemis Negara termuda, mencari tubuhnya kembali." },
+            { id: 8, name: "Erza Scarlet", type: "Waifuable/Powerful", desc: "Mage S-Class dari Fairy Tail. Keras, tapi sangat peduli." },
+            { id: 9, name: "Killua Zoldyck", type: "Husbuable/Agile", desc: "Pembunuh jenius dari keluarga Zoldyck, sahabat sejati Gon." },
+            { id: 10, name: "Makima", type: "Waifuable/Villain", desc: "Pengendali Iblis (Control Devil) yang misterius dan karismatik." },
+            { id: 11, name: "Dio Brando", type: "Husbuable/Villain", desc: "Antagonis ikonik dari Jojo. 'KONO DIO DA!'" },
+            { id: 12, name: "Zero Two", type: "Waifuable/Daring", desc: "Pahlawan wanita unik dari Darling in the FranXX." },
+            { id: 13, name: "Saitama", type: "Husbuable/Comedian", desc: "Pahlawan yang bisa mengalahkan musuh dengan satu pukulan." },
+            { id: 14, name: "Shinobu Kocho", type: "Waifuable/Calm", desc: "Hashira Serangga, selalu tersenyum meski menyimpan kemarahan." },
+            { id: 15, name: "Mai Sakurajima", type: "Waifuable/Elegant", desc: "Gadis Kelinci Senpai yang elegan dan cerdas." },
+            { id: 16, name: "Kuroko Tetsuya", type: "Husbuable/Invisible", desc: "Anggota 'Generasi Keajaiban' yang ahli dalam *misdirection*." },
+            { id: 17, name: "Riza Hawkeye", type: "Waifuable/Loyal", desc: "Letnan yang sangat loyal dan penembak jitu yang handal." },
+            { id: 18, name: "Todoroki Shoto", type: "Husbuable/Cool", desc: "Murid Yuuei dengan Quirk Es dan Api." },
+            { id: 19, name: "Kaguya Shinomiya", type: "Waifuable/Genius", desc: "Wakil ketua OSIS yang jenius, tapi canggung dalam cinta." },
+            { id: 20, name: "Ken Kaneki", type: "Husbuable/Tragic", desc: "Protagonis Tokyo Ghoul. Manusia yang berubah menjadi Ghoul." },
+            { id: 21, name: "Eren Yeager", type: "Husbuable/Angst", desc: "Protagonis Attack on Titan, penuh tekad dan murka." },
+            { id: 22, name: "Asuka Langley Soryu", type: "Waifuable/Tsun", desc: "Pilot Evangelion yang berbakat dan keras kepala." },
+            { id: 23, name: "Spike Spiegel", type: "Husbuable/Cool", desc: "Pemburu hadiah yang malas tapi ahli bela diri." },
+            { id: 24, name: "Violet Evergarden", type: "Waifuable/Stoic", desc: "Boneka Memori Otomatis yang mencari makna cinta." },
+            { id: 25, name: "Kazuma Satou", type: "Husbuable/Trash", desc: "Protagonis Isekai yang realistis dan sering sial." },
+            { id: 26, name: "Megumin", type: "Waifuable/Chuuni", desc: "Arch-Wizard dengan obsesi sihir ledakan." },
+            { id: 27, name: "Tatsumaki", type: "Waifuable/Tsun", desc: "Pahlawan S-Class, 'Tornado of Terror'." },
+            { id: 28, name: "Maki Zenin", type: "Waifuable/Tomboy", desc: "Penyihir non-sihir Jujutsu yang sangat kuat." },
+            { id: 29, name: "Hisoka Morow", type: "Husbuable/Wildcard", desc: "Antagonis yang mencintai pertarungan yang kuat." },
+            { id: 30, name: "Kurisu Makise", type: "Waifuable/Genius", desc: "Ilmuwan jenius yang terlibat dalam penjelajahan waktu." },
+            { id: 31, name: "Shikamaru Nara", type: "Husbuable/Lazy", desc: "Ninja jenius yang malas dari Konoha." },
+            { id: 32, name: "Hinata Hyuga", type: "Waifuable/Shy", desc: "Kunoichi pemalu yang mencintai Naruto." },
+            { id: 33, name: "Thorfinn", type: "Husbuable/Warrior", desc: "Tokoh utama Vinland Saga. Mencari makna hidup sebagai prajurit." },
+            { id: 34, name: "Lucy Heartfilia", type: "Waifuable/Smart", desc: "Penyihir Celestial Spirit dari Fairy Tail." },
+            { id: 35, name: "Akane Tsunemori", type: "Waifuable/Idealist", desc: "Inspektur dari Psycho-Pass dengan moral yang kuat." },
+            { id: 36, name: "Gon Freecss", type: "Husbuable/Energetic", desc: "Protagonis Hunter x Hunter yang ceria dan lugu." },
+            { id: 37, name: "Taiga Aisaka", type: "Waifuable/Palmtop Tiger", desc: "Tsundere utama dari Toradora!." },
+            { id: 38, name: "Ryuji Takasu", type: "Husbuable/Caring", desc: "Protagonis Toradora! yang jago memasak dan merawat." },
+            { id: 39, name: "Homura Akemi", type: "Waifuable/Tragic", desc: "Gadis sihir yang terjebak dalam lingkaran waktu." },
+            { id: 40, name: "Yuno Gasai", type: "Waifuable/Yandere", desc: "Karakter yandere yang ikonik dari Mirai Nikki." },
+            { id: 41, name: "Itachi Uchiha", type: "Husbuable/Sacrifice", desc: "Ninja jenius yang mengorbankan segalanya demi desa dan adiknya." },
+            { id: 42, name: "Aqua", type: "Waifuable/Useless", desc: "Dewi air yang tidak berguna dari Konosuba." },
+            { id: 43, name: "Loid Forger", type: "Husbuable/Spy", desc: "Agen rahasia Twilight, suami palsu Yor." },
+            { id: 44, name: "Anya Forger", type: "Waifuable/Child", desc: "Esper kecil yang menggemaskan dan lucu." },
+            { id: 45, name: "Senku Ishigami", type: "Husbuable/Scientist", desc: "Ilmuwan jenius yang membangkitkan peradaban." },
+            { id: 46, name: "Zoro Roronoa", type: "Husbuable/Swordsman", desc: "Pendekar pedang dari One Piece." },
+            { id: 47, name: "Nami", type: "Waifuable/Thief", desc: "Navigator dari One Piece yang ahli cuaca." },
+            { id: 48, name: "Ichigo Kurosaki", type: "Husbuable/Shinigami", desc: "Protagonis Bleach yang menjadi dewa kematian." },
+            { id: 49, name: "Rukia Kuchiki", type: "Waifuable/Shinigami", desc: "Shinigami yang memberikan kekuatannya pada Ichigo." },
+            { id: 50, name: "Guts", type: "Husbuable/Tragic", desc: "Pendekar pedang hitam dari Berserk." },
+            { id: 51, name: "Erwin Smith", type: "Husbuable/Leader", desc: "Komandan Survey Corps yang karismatik." },
+            { id: 52, name: "Legoshi", type: "Husbuable/Introvert", desc: "Serigala introvert yang mencari tempatnya di dunia Beastars." }
+        ];
+
+        const gameData = [
+            { id: 1, name: "Genshin Impact", genre: "Open World, RPG, Gacha", desc: "Jelajahi Teyvat yang luas. Desain karakter gaya anime." },
+            { id: 2, name: "Honkai Star Rail", genre: "Turn-based, Gacha, Sci-Fi", desc: "Petualangan luar angkasa. Game turn-based dari HoYoverse." },
+            { id: 3, name: "NieR: Automata", genre: "Action RPG, Philosophical", desc: "Kisah 2B dan 9S di dunia pasca-apokaliptik. Soundtrack dan cerita mendalam." },
+            { id: 4, name: "Persona 5 Royal", genre: "JRPG, School, Life Sim", desc: "Bergabung dengan Phantom Thieves. Sangat stylish dan panjang." },
+            { id: 5, name: "Tales of Arise", genre: "Action RPG, Fantasi", desc: "Game JRPG dengan pertarungan cepat dan grafis memukau." },
+            { id: 6, name: "Dragon Ball FighterZ", genre: "Fighting, 2D", desc: "Game pertarungan yang terlihat persis seperti di animenya." },
+            { id: 7, name: "Final Fantasy VII Remake", genre: "Action RPG, Sci-Fi", desc: "Remake legendaris dengan sistem pertarungan modern." },
+            { id: 8, name: "Code Vein", genre: "Action RPG, Souls-like", desc: "Game bertema vampir dengan desain karakter anime yang kental." },
+            { id: 9, name: "Guilty Gear Strive", genre: "Fighting, 2D", desc: "Game pertarungan dengan animasi 3D yang terlihat seperti 2D." },
+            { id: 10, name: "Fire Emblem: Three Houses", genre: "Tactical RPG, School", desc: "Game strategi dengan elemen *dating sim* di akademi." },
+            { id: 11, name: "Honkai Impact 3rd", genre: "Action RPG, Hack and Slash", desc: "Game aksi cepat dengan Valkyrie. Fokus pada cerita dan karakter." },
+            { id: 12, name: "Danganronpa", genre: "Visual Novel, Mystery", desc: "Game detektif di sekolah yang penuh pembunuhan. Penuh plot twist." },
+            { id: 13, name: "Atelier Ryza", genre: "JRPG, Slice of Life, Alchemy", desc: "Game yang fokus pada *crafting* dan petualangan santai." },
+            { id: 14, name: "Digimon Story Cyber Sleuth", genre: "JRPG, Monster Collecting", desc: "Petualangan digital dengan Digimon di Tokyo modern." },
+            { id: 15, name: "Naruto Shippuden: Ultimate Ninja Storm 4", genre: "Fighting, Arena", desc: "Game pertarungan Naruto yang paling epik dan setia pada manga/anime." },
+            { id: 16, name: "Captain Tsubasa: Rise of New Champions", genre: "Sports, Action", desc: "Game sepak bola gaya anime yang hiperbolis." },
+            { id: 17, name: "Octopath Traveler", genre: "JRPG, HD-2D", desc: "JRPG klasik dengan gaya visual yang indah dan unik." },
+            { id: 18, name: "SAO: Fatal Bullet", genre: "Action RPG, TPS", desc: "Game tembak-tembakan berlatar dunia Sword Art Online (Gun Gale Online)." },
+            { id: 19, name: "Bayonetta 3", genre: "Action, Hack and Slash", desc: "Desain karakternya sangat J-Style dan stylish." },
+            { id: 20, name: "Pokémon Legends: Arceus", genre: "Action RPG, Open World", desc: "Evolusi seri Pokémon ke format *action RPG*." },
+            { id: 21, name: "Dragon Quest XI S", genre: "JRPG, Fantasi", desc: "JRPG klasik karya Akira Toriyama (Dragon Ball). Sangat *wholesome*." },
+            { id: 22, name: "Scarlet Nexus", genre: "Action RPG, Sci-Fi", desc: "Game aksi futuristik dengan tema psikokinesis." }
+        ];
+
+        // ==============================
+        // 2. FUNGSI RENDER KARTU & KONTEN (TIDAK BERUBAH)
+        // ==============================
+        function createCard(item, type) {
+            const tagText = type === 'anime' ? item.genre : type === 'character' ? item.type : item.genre;
+            
+            return `
+                <div class="card" title="${item.desc}">
+                    <h3>${item.title || item.name}</h3>
+                    <p>${item.desc}</p>
+                    <span class="genre-tag">${tagText}</span>
+                </div>
+            `;
+        }
+
+        function renderContent(data, gridId, type) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return; 
+
+            if (data.length === 0) {
+                grid.innerHTML = `<p style="text-align: center; padding: 30px; font-weight: 600; color: var(--color-danger); font-family: var(--font-heading);">⚠️ Data tidak ditemukan. Coba genre lain.</p>`;
+                return;
+            }
+
+            const htmlString = data.map(item => createCard(item, type)).join('');
+            grid.innerHTML = htmlString;
+        }
+
+        // ==============================
+        // 3. FUNGSI FILTER GENRE ANIME (TIDAK BERUBAH)
+        // ==============================
+        function getUniqueGenres() {
+            const allGenres = new Set();
+            baseAnime.forEach(anime => {
+                anime.genre.split(',').map(g => g.trim()).forEach(g => {
+                    if (g) allGenres.add(g);
+                });
+            });
+            return Array.from(allGenres).sort();
+        }
+
+        function populateGenreFilter() {
+            const select = document.getElementById('genre-select');
+            const genres = getUniqueGenres();
+
+            select.innerHTML = '<option value="all">-- Tampilkan Semua Genre --</option>';
+            genres.forEach(genre => {
+                const option = document.createElement('option');
+                option.value = genre;
+                option.textContent = genre;
+                select.appendChild(option);
+            });
+        }
+
+        function filterAnime() {
+            const selectedGenre = document.getElementById('genre-select').value;
+            let filteredData = baseAnime;
+
+            if (selectedGenre !== 'all') {
+                filteredData = baseAnime.filter(anime => 
+                    anime.genre.split(',').map(g => g.trim()).includes(selectedGenre)
+                );
+            }
+            
+            renderContent(filteredData, 'anime-grid', 'anime');
+        }
+
+        // ==============================
+        // 4. FUNGSI TEMA (TIDAK BERUBAH)
+        // ==============================
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            updateThemeIcons(isDarkMode);
+        }
+
+        function updateThemeIcons(isDarkMode) {
+             if (isDarkMode) {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            let isDarkMode = savedTheme === 'dark';
+
+            if (savedTheme === null) {
+                isDarkMode = prefersDark;
+            }
+
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            } 
+            updateThemeIcons(isDarkMode);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // ==============================
+        // 5. FUNGSI NAVIGASI (TIDAK BERUBAH)
+        // ==============================
+        function openTab(tabId, buttonElement) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            buttonElement.classList.add('active');
+        }
+
+        // ==============================
+        // 6. INISIALISASI (TIDAK BERUBAH)
+        // ==============================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTheme();
+            
+            populateGenreFilter();
+            
+            renderContent(baseAnime, 'anime-grid', 'anime');
+            renderContent(characterData, 'character-grid', 'character');
+            renderContent(gameData, 'game-grid', 'game');
+            
+            const initialButton = document.querySelector('.tab-button.active');
+            if(initialButton) {
+                 openTab('anime-tab', initialButton);
+            }
+        });
+    </script>
+</body>
+</html>
